@@ -1,1 +1,2 @@
-watch( 'gol.rb' )  {|md| system("clear"); system("rspec #{md[0]}") }
+watch( 'board_spec.rb' )  {|md| system("clear"); system("rspec #{md[0]}") }
+watch( 'board.rb' )  {|md| system("clear"); system("rspec board_spec.rb") }
