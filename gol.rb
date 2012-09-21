@@ -25,9 +25,16 @@ class Board
 		end
 	end
 
+	def distance(cell1, cell2)
+		x = cell1[0] - cell2[0]
+		y = cell1[1] - cell2[1]
+		Math.sqrt( (x * x) + (y * y) )
+	end
+
 	def neighbors(ccell)
 		@live_cells.inject([]) do |result, cell|
-			if ( ((ccell[0] - cell[0]).abs == 1) || ((ccell[1] - cell[1]).abs == 1))
+			d = distance(ccell, cell)
+			if ( ( d == 1) || ( d == Math.sqrt(2)))
 				result << cell
 			end
 			result
@@ -69,8 +76,23 @@ describe Board do
 		pending "live_cells is an array of arrays"	
 	end
 
+	context "Get distance"	do
+		it "should return distance between 2 nodes" do
+			board = Board.new(5)
+			board.distance([3,0], [0,4]).should == 5
+		end
+	end
+
+	context "Distance between neighbors" do
+		it "should be 1 or sqrt(2)" do
+			board = Board.new(5)
+			board.distance([1,1], [1,2]).should == 1
+			board.distance([1,1], [2,2]).should == Math.sqrt(2)
+		end
+	end
+
 	context "Get Neighbors" do
-		pending "should return array of neighbors" do
+		it "should return array of neighbors" do
 			board = Board.new(4, [ [0,0], [0,1], [2,1], [0,2], [3,2], [1,3] ])
 			# board.size.should == 4
 			board.neighbors([1,1]).should == [ [0,0], [0,1], [2,1], [0,2] ]
