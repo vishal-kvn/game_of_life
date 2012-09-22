@@ -64,6 +64,8 @@ class Board
 
 			end
 		end
+		# @live_cells = @new_live_cells
+
 
 		@new_live_cells
 	end

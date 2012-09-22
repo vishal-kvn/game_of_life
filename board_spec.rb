@@ -1,5 +1,5 @@
 require 'rspec'
-require '/Users/vkajjam/dev/game_of_life/board.rb'
+require './board.rb'
 
 
 describe Board do
